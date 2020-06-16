@@ -10,16 +10,15 @@
 clear
 
 if [ ! -d /var/www/html ]; then
-	echo "Nice it's install composer/PHP automatic"
+	echo "Nice it's install composer/PHP automatic on /var/www/html"
 	cd /var/www/html # && mkdir -p libs
 	curl -O https://getcomposer.org/download/1.10.7/composer.phar
 
 else
+	echo "Nice it's install composer/PHP automatic"
 	curl -O https://getcomposer.org/download/1.10.7/composer.phar
-	exit 1
+
 fi
-
-
  
 EXPECTED_SIGNATURE = $( wget -q -O - https://composer.github.io/installer.sig ) 
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" 
@@ -36,6 +35,7 @@ if [ " $EXPECTED_SIGNATURE " ! = " $ACTUAL_SIGNATURE " ]; then>&2
 	composer require symfony/cache --no-dev
 	composer require symfony/phpunit-bridge --no-dev
 	composer require matthiasmullie/minify --no-dev
+	composer require adodb/adodb-php --no-dev
 	composer install --no-dev
 	composer update --no-dev
 	composer dump-autoload --no-dev
@@ -51,6 +51,7 @@ fi
 	composer require symfony/cache --no-dev
 	composer require symfony/phpunit-bridge --no-dev
 	composer require matthiasmullie/minify --no-dev
+	composer require adodb/adodb-php --no-dev
 	composer install --no-dev
 	composer update --no-dev
 	composer dump-autoload --no-dev
